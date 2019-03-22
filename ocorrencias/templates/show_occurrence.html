@@ -1,0 +1,22 @@
+{%extends 'index.html' %}
+
+   {%block title %} Ocorrencias {% endblock %}
+
+    {%block content %} 
+
+    <p>Mostrando ocorrencias!!!</p>       
+        <ul>
+            {%for ocorrencia in ocorrencias %}
+
+                <li>
+                    <a href="{% url 'ocorrencias_edit' ocorrencia.id %}">{{ocorrencia}}</a>
+                    <a href="{% url 'ocorrencias_delete' ocorrencia.id %}">Deletar</a>
+                </li>
+
+            {% endfor %}
+        </ul>
+    <a href="{% url 'ocorrencias_new' %}">Nova Ocorrencia</a>
+
+
+    {% endblock %}
+
