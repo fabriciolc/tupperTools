@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from decouple import config
+from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'bnwia=p)-ml#e^w2r6gbg7u4$fh@^9si4t_u31dh1eoj54n!53'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tupper-tools.herokuapp.com']
 
 
 # Application definition
@@ -75,17 +77,23 @@ WSGI_APPLICATION = 'tupperTools.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+default_dburl = 'sqlite:///'+os.path.join(BASE_DIR, 'db.sqlite3')
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'production_site',
-        # 'NAME': os.path.join(BASE_DIR, 'mydb'),
-        'USER': 'postdb',
-        'PASSWORD': 'fdc00003',
-        'HOST': '127.0.0.1',
-        'PORT': '5432', # 8000 is default
-    }
+    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'production_site',
+#         # 'NAME': os.path.join(BASE_DIR, 'mydb'),
+#         'USER': 'postdb',
+#         'PASSWORD': 'fdc00003',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432', # 8000 is default
+#     }
+# }
 
 
 # Password validation
@@ -128,6 +136,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'statics',
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Local para arquivos upado
 MEDIA_URL = '/files/'
 MEDIA_ROOT = 'files'
