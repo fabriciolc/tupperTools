@@ -1,8 +1,6 @@
 {%extends 'index.html' %}
    {%block title %} Home {% endblock %}
     {%block content %} 
-        {% if user.is_authenticated %}
-        <p>Welcome {{ user.username }} !!!</p>       
-        {% endif %}
+        <p>Welcome {{ user.username }} !!!</p>
     {% endblock %}
 

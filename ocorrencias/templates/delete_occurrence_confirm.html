@@ -3,10 +3,9 @@
    {%block title %} Ocorrencias {% endblock %}
 
     {%block content %} 
-        <h1>Tem certeza que deseja deletar a Ocorrencia?</h1>
+        <h1>Tem certeza que deseja deletar a Ocorrencia? {{ocorrencia.ocorrencia}}</h1>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form }}
             <button type="submit">Delete</button>
          </form>
 

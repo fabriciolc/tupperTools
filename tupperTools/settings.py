@@ -128,6 +128,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     'statics',
 ]
-
+# Local para arquivos upado
 MEDIA_URL = '/files/'
 MEDIA_ROOT = 'files'
+
+#Login
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = 'home'
