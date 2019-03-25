@@ -9,8 +9,12 @@
     <title>{% block title %}  {% endblock %}</title>
 </head>
 <body>
-    <a href="{% url 'logout'%}">Sair</a>
-    aaa
-    {%block content %} {% endblock %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout'%}">Sair</a>
+            Seja bem vindo {{ user.username }}
+    {% else %}
+        <a href=" {% url 'login' %} ">Entrar</a>        
+    {% endif %}
+    {% block content %} {% endblock %}
 </body>
 </html>
