@@ -1,3 +1,6 @@
 *.idea
 *.sqlite3
 *.pyc
+files/ocorrencias/*
+.DS_Store
+media
