@@ -1,22 +1,122 @@
-{%extends 'index.html' %}
+{% extends 'index.html'%}
+{% load widget_tweaks %}
+{% load static %}
 
-   {%block title %} Ocorrencias {% endblock %}
+   {% block title %} Ocorrencias {% endblock %}
+   
+   {% block content %} 
+    {% comment %} <a href="{% url 'ocorrencias_new' %}">Nova Ocorrencia</a> {% endcomment %}
+    <!-- Begin Page Content -->
+        <div class="container-fluid">
 
-    {%block content %} 
+          <!-- Page Heading -->
+          {% comment %} <h1 class="h3 mb-2 text-gray-800">Ocorrencias</h1> {% endcomment %}
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Ocorrencias</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Codigo Produto</th>
+                      <th>Consultora</th>
+                      <th>Descrição</th>
+                      <th>Nota</th>
+                      <th>Criada em</th>
+                      <th>Opções</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for ocorrencia in ocorrencias %}
+                    <tr>
+                      <td>{{ocorrencia.id}}</td>
+                      <td>{{ocorrencia.codigo_produto}}</td>
+                      <td>{{ocorrencia.consultora.nome}}</td>
+                      <td>{{ocorrencia.ocorrencia}}</td>
+                      <td><a href=" {% get_media_prefix %}{{ocorrencia.nota}}"><i class="fas fa-file-invoice"></i></a></td>
+                      <td>{{ocorrencia.date_created}}</td>
+                      <td><a href="{% url 'ocorrencias_edit' ocorrencia.id %}" class="fas fa-edit"></a> <a class="fas fa-trash-alt" href="#" data-toggle="modal" data-target="#deleteModal"></a></td>
+                    </tr>    
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Aviso!</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Você deseja deseja excluir essa Ocorrencia ?</div>
+                            <form method="POST" enctype="multipart/form-data" action="{% url 'ocorrencias_delete' ocorrencia.id %}">
+                                {% csrf_token %}
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary" >Sim</button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-    <p>Ocorrencias</p>       
-        <ul>
-            {%for ocorrencia in ocorrencias %}
+        </div>
+        <!-- /.container-fluid -->
 
-                <li>
-                    <a href="{% url 'ocorrencias_edit' ocorrencia.id %}">{{ocorrencia}}</a>
-                    <a href="{% url 'ocorrencias_delete' ocorrencia.id %}">Deletar</a>
-                </li>
+      </div>
+      <!-- End of Main Content -->
 
-            {% endfor %}
-        </ul>
-    <a href="{% url 'ocorrencias_new' %}">Nova Ocorrencia</a>
+    <!-- Footer -->
+   <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2019</span>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
 
     {% endblock %}
+ {% block scripts %}
+   <!-- Bootstrap core JavaScript-->
+    <script src=" {% static 'vendor/jquery/jquery.min.js' %} "></script>
+    <script src=" {% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src=" {% static 'vendor/jquery-easing/jquery.easing.min.js' %} "></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src=" {% static 'js/sb-admin-2.min.js' %} "></script>
+
+    <!-- Page level plugins -->
+    <script src=" {% static 'vendor/datatables/jquery.dataTables.min.js' %} "></script>
+    <script src=" {% static 'vendor/datatables/dataTables.bootstrap4.min.js' %} "></script>
+
+    <!-- Page level custom scripts -->
+    <script src=" {% static 'js/demo/datatables-demo.js' %} "></script>
+
+</body>
+{% endblock scripts %}
+   
 

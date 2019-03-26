@@ -5,3 +5,4 @@ files/ocorrencias/*
 .DS_Store
 media
 .env
+*env

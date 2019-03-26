@@ -34,4 +34,4 @@ def ocorrencias_delete(request,id):
         ocorrencia.delete()
         return redirect('ocorrencias_show')
     
-    return render(request, 'delete_occurrence_confirm.html' ,  {'ocorrencia': ocorrencia})
+    return 

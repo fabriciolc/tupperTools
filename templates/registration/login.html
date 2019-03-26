@@ -1,4 +1,4 @@
-{%extends 'index.html' %}
+{%extends 'indexlogin.html' %}
 {% load widget_tweaks %}
 {% load static %}
 {% block title %} Login {% endblock %}
@@ -35,10 +35,11 @@
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
+                        <label class="custom-control-label" for="customCheck">Remember Me</label
+                        <i class="fas fa-align-justify"></i>
                       </div>
                     </div>
-                    <button  class="btn btn-primary btn-user btn-block" type="submit">Login</button>
+                    <button  class="btn btn-primary btn-user btn-block fas fa-align-justify" type="submit">Login</button>
                     {% if form.errors %}
                         <hr>
                         {% for field in form %}
@@ -55,6 +56,7 @@
                         {% endfor %}
                     {% endif %}
                   </form>
+                  <i class=""></i>
                 </div>
               </div>
             </div>

@@ -5,7 +5,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Ocorrencia(models.Model):
-    codigo_consultora = models.ForeignKey(Consultora, on_delete=models.CASCADE)
+    consultora = models.ForeignKey(Consultora, on_delete=models.CASCADE, related_name="ocorrencias_consultora")
     codigo_produto = models.IntegerField()
     numero_nota = models.IntegerField()
     ocorrencia = models.TextField(max_length=200)
@@ -15,4 +15,4 @@ class Ocorrencia(models.Model):
     date_created = models.DateField(default=date.today)
     last_updated = models.DateField(auto_now=True)
     def __str__(self):
-        return (str(self.codigo_consultora)+" | "+ str(self.codigo_produto)+" | "+str(self.status))
+        return (str(self.consultora)+" | "+ str(self.codigo_produto)+" | "+str(self.status))
