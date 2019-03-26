@@ -1,14 +1,72 @@
 {% extends 'index.html' %}
-
+{% load widget_tweaks %}
+{% load static %}
 {% block title %} Ocorrencias {% endblock %}
 
-{% block content %}
 <form method="POST" enctype="multipart/form-data">
-   {% csrf_token %}
    {{ form }}
    <button type="submit">Salvar</button>
    <button type="reset">Limpar</button>
 </form>
+{% block content %}
+
+
+<div class="container-fluid">
+   <div class="card shadow mb-4">
+      <div class="card-header py-3">
+         {{ titulo }}
+      </div>
+      <div class="card-body">
+         <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group row">
+               <label  class="col-sm-2 col-form-label">Consultora</label>
+               <div class="col-sm-8">
+               {% render_field form.consultora type="text" class+="form-control form-control-user" placeholder="Consultora"%}
+               </div>
+            </div>
+            <div class="form-group row">
+               <label  class="col-sm-2 col-form-label">Codigo Produto</label>
+               <div class="col-sm-8">
+                {% render_field form.codigo_produto type="text" class+="form-control form-control-user" placeholder="Codigo Produto"%}
+               </div>
+            </div>
+            <div class="form-group row">
+               <label  class="col-sm-2 col-form-label">Numero da nota</label>
+               <div class="col-sm-8">
+                {% render_field form.numero_nota type="text" class+="form-control form-control-user" placeholder="Numero da nota"%}
+               </div>
+            </div>
+            <div class="form-group row">
+               <label  class="col-sm-2 col-form-label" >Codigo Produto</label>
+               <div class="col-sm-8">
+                {% render_field form.ocorrencia type="text" class+="form-control form-control-user" placeholder="Codigo Produto"%}
+               </div>
+            </div>         
+            <div class="form-group row">
+               <label  class="col-sm-2 col-form-label" >Observação</label>
+               <div class="col-sm-8">
+                {% render_field form.observacao type="text" class+="form-control form-control-user" placeholder=""%}
+               </div>
+            </div>  
+            <div class="form-group row">
+               <label  class="col-sm-2 col-form-label" >Status</label>
+               <div class="col-sm-8">
+                {% render_field form.status type="text" class+="form-control " placeholder=""%}
+               </div>
+            </div>    
+            <div class="form-group row">
+               <label  class="col-sm-2 col-form-label" >Nota</label>
+               <div class="col-sm-8">
+                {% render_field form.nota type="file" multiple=""  class+="" id="customFile" %}
+               </div>
+            </div>     
+            <button type="submit" class="btn btn-primary">Submit</button>
+         </form>
+      </div>
+   </div>
+</div> 
+
 
 
 
