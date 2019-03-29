@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'home',
     'ocorrencias',
+    'liberadas',
+
 ]
 
 MIDDLEWARE = [
@@ -119,9 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-BR'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -137,7 +139,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 # Local para arquivos upado
 MEDIA_URL = '/files/'
 MEDIA_ROOT = 'files'

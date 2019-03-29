@@ -27,6 +27,7 @@
                       <th>Nota</th>
                       <th>Criada em</th>
                       <th>Opções</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -39,6 +40,7 @@
                       <td><a href=" {% get_media_prefix %}{{ocorrencia.nota}}"><i class="fas fa-file-invoice"></i></a></td>
                       <td>{{ocorrencia.date_created}}</td>
                       <td><a href="{% url 'ocorrencias_edit' ocorrencia.id %}" class="fas fa-edit"></a> <a class="fas fa-trash-alt" href="#" data-toggle="modal" data-target="#deleteModal"></a></td>
+                      <td class="bg-warning">{{ocorrencia.status}} </td>
                     </tr>    
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
