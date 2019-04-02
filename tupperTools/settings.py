@@ -164,4 +164,4 @@ LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = 'home'
 
-CORS_ORIGIN_WHITELIST = 'localhost:8000','localhost:8100'
+CORS_ORIGIN_WHITELIST = 'localhost:8000','localhost:8100','*'
