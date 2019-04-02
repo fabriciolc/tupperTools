@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['tupper-tools.herokuapp.com','localhost', '192.168.10.54']
+ALLOWED_HOSTS = ['tupper-tools.herokuapp.com','localhost', '192.168.10.54','localhost:8080']
 
 
 # Application definition

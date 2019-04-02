@@ -59,7 +59,7 @@ def salvarCaixas(file):
                 caixa.consultora = consultora
                 try:
                     caixa.save()
-                except expression as identifier:
+                except Exception as e:
                     pass
 
 def salvarLiberada(file,semanaliberada):
@@ -100,7 +100,7 @@ def salvarLiberada(file,semanaliberada):
                         lista.idsemana = r
                         lista.ano = int(str(r)[0:4])
                         lista.semana = int(str(r)[4:6])
-                        lista.link = "http://192.168.10.96:8000/api/liberadas/"+str(r)
+                        lista.link = "http://tupper-tools.herokuapp.com/api/liberadas/"+str(r)
                         try:
                             lista.save()
                         except expression as identifier:
