@@ -29,7 +29,7 @@ class api_listLiberada(APIView):
                 lista.idsemana = r
                 lista.ano = int(str(r)[0:4])
                 lista.semana = int(str(r)[4:6])
-                lista.link = "http://192.168.10.54:8000/api/liberadas/"+str(r)
+                lista.link = "http://tupper-tools.herokuapp.com/api/liberadas/"+str(r)
                 lista.save()
             
         lista = list(listSemana.objects.all().values())

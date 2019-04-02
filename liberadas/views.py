@@ -12,6 +12,10 @@ import os, csv
 
 
 def form_liberadas(request):
+    context = {
+        'semana_liberada' : int(datetime.datetime.now().strftime("%Y%V"))-1,
+        'titulo' : 'Liberada',
+    }
     if request.method == "POST":
         try:
             uploaded_file = request.FILES['fabrica_uploaded_file'].read() # get the uploaded file
@@ -22,14 +26,15 @@ def form_liberadas(request):
             print(e)
             pass
         try:
+            semana = request.POST.get('semanav')
             csvfile = TextIOWrapper(request.FILES['liberada_uploaded_file'].file)
-            salvarLiberada(csvfile)
-            return render(request, 'indexliberada.html')
+            salvarLiberada(csvfile, semana)
+            return render(request, 'form_liberada.html')
         except Exception as e:
             print("erro 2")
             print(e)
             pass
-    return render(request, 'indexliberada.html')
+    return render(request, 'form_liberada.html', context)
 def salvarCaixas(file):
     for a in file.splitlines():
                 a = a.decode('utf-8')
@@ -58,7 +63,7 @@ def salvarCaixas(file):
                 except expression as identifier:
                     pass
 
-def salvarLiberada(file):
+def salvarLiberada(file,semanaliberada):
     reader = csv.reader(file,delimiter=";")
     for row in reader:
         if methods.is_number(row[3]):
@@ -71,12 +76,11 @@ def salvarLiberada(file):
             
             caixa = Caixa_fabrica.objects.filter(consultora=codigo_consultora,semana=semana)
 
-            print(caixa)
             if not caixa:
-                print("teste")
+                print("caixa nao encontrada")
             else:
                 for cx in caixa:
-                    print("Teste",cx)
+                    print(cx)
                     liberada = Liberada()
                     liberada.consultora = cx.consultora
                     liberada.semana = cx.semana
@@ -84,7 +88,7 @@ def salvarLiberada(file):
                     liberada.entregador = entregador
                     liberada.volume_atual = cx.volume_atual
                     liberada.volume_total = cx.volume_total
-                    liberada.semana_liberada = int(datetime.datetime.now().strftime("%Y%V"))
+                    liberada.semana_liberada = int(semanaliberada)
                     liberada.caixa_fabrica = cx
                     liberada.save()
                 with connection.cursor() as cursor:
