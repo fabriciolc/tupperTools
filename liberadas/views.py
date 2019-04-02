@@ -3,28 +3,11 @@ from home.models import Consultora
 from .models import Caixa_fabrica,Liberada
 from io import TextIOWrapper
 from django.http import JsonResponse
+import home.methods as methods
 import datetime
 import os, csv
 
 # Create your views here.
-def is_number(s):
-    try:
-        float(s)
-        if s == "":
-            return False
-        return True
-    except ValueError:
-        pass
- 
-    try:
-        import unicodedata
-        unicodedata.numeric(s)
-        return True
-    except (TypeError, ValueError):
-        pass
- 
-    return False
-
 def form_caixas_fabrica(request):
     if request.method == "POST":
         uploaded_file = request.FILES['uploaded_file'].read() # get the uploaded file
@@ -64,7 +47,7 @@ def form_liberadas(request):
         csvfile = TextIOWrapper(request.FILES['uploaded_file'].file)
         reader = csv.reader(csvfile,delimiter=";")
         for row in reader:
-            if is_number(row[3]):
+            if methods.is_number(row[3]):
                 rota = int(row[0])
                 semana = int(row[1])
                 totalcaixa = row[2]
@@ -72,8 +55,6 @@ def form_liberadas(request):
                 nome_consultora = row[4]
                 entregador = row[5][0:15]
                 
-                #print(codigo_consultora)
-
                 caixa = Caixa_fabrica.objects.filter(consultora=codigo_consultora,semana=semana)
 
                 print(caixa)
@@ -92,12 +73,18 @@ def form_liberadas(request):
                         liberada.semana_liberada = int(datetime.datetime.now().strftime("%Y%V"))
                         liberada.caixa_fabrica = cx
                         liberada.save()
-                    #liberada.caixa_fabrica = caixa.codigo_caixa
+                    with connection.cursor() as cursor:
+                        cursor.execute("SELECT semana_liberada FROM public.liberadas_liberada group by semana_liberada")
+                        row = cursor.fetchone()
+                        for r in row:
+                            print(str(r)[0:4])
+                            lista = listSemana()
+                            lista.idsemana = r
+                            lista.ano = int(str(r)[0:4])
+                            lista.semana = int(str(r)[4:6])
+                            lista.link = "http://192.168.10.96:8000/api/liberadas/"+str(r)
+                            lista.save()
             else:
                 print("nao é numero")
-
-        data = list(Liberada.objects.values())
-        return JsonResponse(data, safe=False)
-
     return render(request, 'indexliberada.html')
 

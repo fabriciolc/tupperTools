@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['tupper-tools.herokuapp.com','localhost']
+ALLOWED_HOSTS = ['tupper-tools.herokuapp.com','localhost', '192.168.10.54']
 
 
 # Application definition
@@ -43,12 +43,16 @@ INSTALLED_APPS = [
     'home',
     'ocorrencias',
     'liberadas',
-
+    'rest_framework',
+    'rest_framework.authtoken',
+    'api',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -76,7 +80,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tupperTools.wsgi.application'
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -152,3 +163,5 @@ LOGIN_REDIRECT_URL = 'home'
 
 
 LOGOUT_REDIRECT_URL = 'home'
+
+CORS_ORIGIN_WHITELIST = 'localhost:8000','localhost:8100'

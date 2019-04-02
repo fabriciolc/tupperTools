@@ -16,3 +16,4 @@ class Ocorrencia(models.Model):
     last_updated = models.DateField(auto_now=True)
     def __str__(self):
         return (str(self.consultora)+" | "+ str(self.codigo_produto)+" | "+str(self.status))
+

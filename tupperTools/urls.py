@@ -19,8 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView,LogoutView
-
-
+from rest_framework.authtoken import views as rest_framework_views
 urlpatterns = [
     path('', include('home.urls',), name='home'),
     path('ocorrencias/', include('ocorrencias.urls')),
@@ -28,4 +27,6 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('liberadas/', include('liberadas.urls'), name='liberadas'),
+    path('api-token-auth/', rest_framework_views.obtain_auth_token, name='api-token-auth/'),
+    path('api/', include('api.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
