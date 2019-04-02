@@ -29,7 +29,6 @@ def form_liberadas(request):
             semana = request.POST.get('semanav')
             csvfile = TextIOWrapper(request.FILES['liberada_uploaded_file'].file)
             salvarLiberada(csvfile, semana)
-            return render(request, 'form_liberada.html')
         except Exception as e:
             print("erro 2")
             print(e)
@@ -65,6 +64,7 @@ def salvarCaixas(file):
 
 def salvarLiberada(file,semanaliberada):
     reader = csv.reader(file,delimiter=";")
+    count = 0
     for row in reader:
         if methods.is_number(row[3]):
             rota = int(row[0])
@@ -77,7 +77,8 @@ def salvarLiberada(file,semanaliberada):
             caixa = Caixa_fabrica.objects.filter(consultora=codigo_consultora,semana=semana)
 
             if not caixa:
-                print("caixa nao encontrada")
+                count = count+1
+                print(row)
             else:
                 for cx in caixa:
                     print(cx)
@@ -95,7 +96,6 @@ def salvarLiberada(file,semanaliberada):
                     cursor.execute("SELECT semana_liberada FROM public.liberadas_liberada group by semana_liberada")
                     row = cursor.fetchone()
                     for r in row:
-                        print(str(r)[0:4])
                         lista = listSemana()
                         lista.idsemana = r
                         lista.ano = int(str(r)[0:4])
@@ -108,4 +108,4 @@ def salvarLiberada(file,semanaliberada):
                         
         else:
             print("nao é numero")
-
+    print("nao foi encontradas",count,"caixas")
