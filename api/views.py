@@ -21,17 +21,19 @@ class api_listLiberada(APIView):
 
     def get(self, request):
         with connection.cursor() as cursor:
-            cursor.execute("SELECT semana_liberada FROM public.liberadas_liberada group by semana_liberada")
-            row = cursor.fetchone()
-            print(row)
+            cursor.execute("SELECT semana_liberada FROM public.liberadas_liberada GROUP BY semana_liberada")
+            row = cursor.fetchall()
             for r in row:
-                print(str(r)[0:4])
-                print(r)
                 lista = listSemana()
-                lista.idsemana = r
-                lista.ano = int(str(r)[0:4])
-                lista.semana = int(str(r)[4:6])
-                lista.link = "http://tupper-tools.herokuapp.com/api/liberadas/"+str(r)
+                lista.idsemana = r[0]
+                lista.ano = int(str(r[0])[0:4])
+                lista.semana = int(str(r[0])[4:6])
+                lista.link = "http://tupper-tools.herokuapp.com/api/liberadas/"+str(r[0])
+                try:
+                    lista.save()
+                except Exception as e:
+                    pass
+                        
             
             
         lista = list(listSemana.objects.all().values())
