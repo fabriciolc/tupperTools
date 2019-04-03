@@ -23,6 +23,7 @@ class api_listLiberada(APIView):
         with connection.cursor() as cursor:
             cursor.execute("SELECT semana_liberada FROM public.liberadas_liberada group by semana_liberada")
             row = cursor.fetchone()
+            print(row)
             for r in row:
                 print(str(r)[0:4])
                 print(r)
@@ -31,7 +32,7 @@ class api_listLiberada(APIView):
                 lista.ano = int(str(r)[0:4])
                 lista.semana = int(str(r)[4:6])
                 lista.link = "http://tupper-tools.herokuapp.com/api/liberadas/"+str(r)
-                lista.save()
+            
             
         lista = list(listSemana.objects.all().values())
         return JsonResponse(lista, safe=False)
