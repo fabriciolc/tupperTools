@@ -25,6 +25,7 @@ class api_listLiberada(APIView):
             row = cursor.fetchone()
             for r in row:
                 print(str(r)[0:4])
+                print(r)
                 lista = listSemana()
                 lista.idsemana = r
                 lista.ano = int(str(r)[0:4])
