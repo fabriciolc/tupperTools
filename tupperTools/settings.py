@@ -93,21 +93,21 @@ REST_FRAMEWORK = {
 
 default_dburl = 'sqlite:///'+os.path.join(BASE_DIR, 'db.sqlite3')
 
-# DATABASES = {
-#     'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
-# }
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        # 'NAME': os.path.join(BASE_DIR, 'mydb'),
-        'USER': 'dbtools',
-        'PASSWORD': 'fdc00003',
-        'HOST': 'tupper-tools.ctvqoemxqu8v.sa-east-1.rds.amazonaws.com',
-        'PORT': '5432', # 8000 is default
-    }
+    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         # 'NAME': os.path.join(BASE_DIR, 'mydb'),
+#         'USER': 'dbtools',
+#         'PASSWORD': 'fdc00003',
+#         'HOST': 'tupper-tools.ctvqoemxqu8v.sa-east-1.rds.amazonaws.com',
+#         'PORT': '5432', # 8000 is default
+#     }
+# }
 
 
 # Password validation
