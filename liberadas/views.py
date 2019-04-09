@@ -7,9 +7,16 @@ from django.http import JsonResponse
 import home.methods as methods
 import datetime
 from django.db import connection
+from threading import Thread
 import os, csv
 
 
+def start_new_thread(function):
+    def decorator(*args, **kwargs):
+        t = Thread(target = function, args=args, kwargs=kwargs)
+        t.daemon = True
+        t.start()
+    return decorator
 
 def form_liberadas(request):
     context = {
@@ -19,7 +26,11 @@ def form_liberadas(request):
     if request.method == "POST":
         try:
             uploaded_file = request.FILES['fabrica_uploaded_file'].read() # get the uploaded file
-            salvarCaixas(uploaded_file)
+            with open("files/caixas/caixas.txt","w") as f:
+                for a in uploaded_file.splitlines():
+                    print(a.decode('utf-8'))
+                    f.write(str(a.decode('utf-8'))+"\n")
+                salvarCaixas()
             pass
         except Exception as e:
             print("erro 1")
@@ -34,33 +45,35 @@ def form_liberadas(request):
             print(e)
             pass
     return render(request, 'form_liberada.html', context)
-def salvarCaixas(file):
-    for a in file.splitlines():
-                a = a.decode('utf-8')
-                codigo_caixa = a[0:18]
-                lote = a[18:26]
-                volume_atual = a[26:30]
-                volume_total = a[30:34]
-                distribuicao = a[34:46]
-                rota = a[46:50]
-                ano = a[50:54]
-                semana = a[54:56]
-                consultora = a[56:62]
-                print(codigo_caixa,lote,volume_atual,volume_total,distribuicao,rota,ano,semana,consultora)
-                caixa = Caixa_fabrica()
-                caixa.codigo_caixa = str(codigo_caixa)
-                caixa.lote = lote
-                caixa.volume_atual = volume_atual
-                caixa.volume_total = volume_total
-                caixa.distribuicao = distribuicao
-                caixa.rota = rota
-                caixa.ano = ano
-                caixa.semana = semana
-                caixa.consultora = consultora
-                try:
-                    caixa.save()
-                except Exception as e:
-                    pass
+
+@start_new_thread
+def salvarCaixas():
+    f = open("files/caixas/caixas.txt", "r")
+    for a in f:
+        codigo_caixa = a[0:18]
+        lote = a[18:26]
+        volume_atual = a[26:30]
+        volume_total = a[30:34]
+        distribuicao = a[34:46]
+        rota = a[46:50]
+        ano = a[50:54]
+        semana = a[54:56]
+        consultora = a[56:62]
+        print(codigo_caixa,lote,volume_atual,volume_total,distribuicao,rota,ano,semana,consultora)
+        caixa = Caixa_fabrica()
+        caixa.codigo_caixa = str(codigo_caixa)
+        caixa.lote = lote
+        caixa.volume_atual = volume_atual
+        caixa.volume_total = volume_total
+        caixa.distribuicao = distribuicao
+        caixa.rota = rota
+        caixa.ano = ano
+        caixa.semana = semana
+        caixa.consultora = consultora
+        try:
+            caixa.save()
+        except Exception as e:
+            pass
 
 def salvarLiberada(file,semanaliberada):
     reader = csv.reader(file,delimiter=";")
