@@ -92,6 +92,7 @@ def salvarLiberada(file,semanaliberada):
                     liberada.semana_liberada = int(semanaliberada)
                     liberada.caixa_fabrica = cx
                     liberada.save()
+                    Caixa_fabrica.objects.filter(codigo_caixa=cx.codigo_caixa).update(liberada_status=True)
                 with connection.cursor() as cursor:
                     cursor.execute("SELECT semana_liberada FROM public.liberadas_liberada group by semana_liberada")
                     row = cursor.fetchall()

@@ -15,7 +15,7 @@ class Caixa_fabrica(models.Model):
     ano = models.IntegerField()
     semana = models.IntegerField()
     consultora = models.IntegerField()
-    
+    liberada_status = models.BooleanField(default=False)
     
 
 class Liberada(models.Model):
