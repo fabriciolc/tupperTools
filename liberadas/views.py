@@ -45,32 +45,33 @@ def form_liberadas(request):
 @start_new_thread
 def salvarCaixas(file):
     for a in file.splitlines():
-                a = a.decode('utf-8')
-                codigo_caixa = a[0:18]
-                lote = a[18:26]
-                volume_atual = a[26:30]
-                volume_total = a[30:34]
-                distribuicao = a[34:46]
-                rota = a[46:50]
-                ano = a[50:54]
-                semana = a[54:56]
-                consultora = a[56:62]
-                print(codigo_caixa,lote,volume_atual,volume_total,distribuicao,rota,ano,semana,consultora)
-                caixa = Caixa_fabrica()
-                caixa.codigo_caixa = str(codigo_caixa)
-                caixa.lote = lote
-                caixa.volume_atual = volume_atual
-                caixa.volume_total = volume_total
-                caixa.distribuicao = distribuicao
-                caixa.rota = rota
-                caixa.ano = ano
-                caixa.semana = semana
-                caixa.consultora = consultora
-                try:
-                    caixa.save()
-                except Exception as e:
-                    pass
-
+        a = a.decode('utf-8')
+        codigo_caixa = a[0:18]
+        lote = a[18:26]
+        volume_atual = a[26:30]
+        volume_total = a[30:34]
+        distribuicao = a[34:46]
+        rota = a[46:50]
+        ano = a[50:54]
+        semana = a[54:56]
+        consultora = a[56:62]
+        print(codigo_caixa,lote,volume_atual,volume_total,distribuicao,rota,ano,semana,consultora)
+        caixa = Caixa_fabrica()
+        caixa.codigo_caixa = str(codigo_caixa)
+        caixa.lote = lote
+        caixa.volume_atual = volume_atual
+        caixa.volume_total = volume_total
+        caixa.distribuicao = distribuicao
+        caixa.rota = rota
+        caixa.ano = ano
+        caixa.semana = semana
+        caixa.consultora = consultora
+        try:
+            caixa.save()
+        except Exception as e:
+            pass
+    
+@start_new_thread
 def salvarLiberada(file,semanaliberada):
     reader = csv.reader(file,delimiter=";")
     count = 0
