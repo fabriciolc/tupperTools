@@ -121,3 +121,10 @@ def salvarLiberada(file,semanaliberada):
         else:
             print("nao é numero")
     print("nao foi encontradas",count,"caixas")
+
+def show_liberadas(request):
+    liberadas = Liberada.objects.all()
+    context = {
+        'liberadas':liberadas,
+    }
+    return render(request,'show_liberadas.html', context)
