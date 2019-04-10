@@ -35,7 +35,8 @@ def form_liberadas(request):
             pass
         try:
             semana = request.POST.get('semanav')
-            csvfile = TextIOWrapper(request.FILES['liberada_uploaded_file'].file)
+            #csvfile = TextIOWrapper(request.FILES['liberada_uploaded_file'].file)
+            csvfile = request.FILES['liberada_uploaded_file'].read()
             salvarLiberada(csvfile, semana)
         except Exception as e:
             print("erro 2")
@@ -70,12 +71,12 @@ def salvarCaixas(file):
             caixa.save()
         except Exception as e:
             pass
-    
 @start_new_thread
 def salvarLiberada(file,semanaliberada):
-    reader = csv.reader(file,delimiter=";")
+    arq = file.decode("utf-8").splitlines()
+    rd = csv.reader(arq,delimiter=";")
     count = 0
-    for row in reader:
+    for row in rd:
         if methods.is_number(row[3]):
             rota = int(row[0])
             semana = int(row[1])
