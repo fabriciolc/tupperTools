@@ -17,17 +17,24 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table 
+                      class="table table-bordered"
+                      id="table" 
+                      data-toggle="table"
+                      data-search="true"
+                      data-filter-control="true" 
+                      data-show-export="true"
+                      data-toolbar="#toolbar">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Codigo Produto</th>
-                      <th>Consultora</th>
-                      <th>Descrição</th>
-                      <th>Nota</th>
-                      <th>Criada em</th>
-                      <th>Opções</th>
-                      <th>Status</th>
+                      <th data-field="ocorrencia" data-sortable="true">Ocorrencia</th>
+                      <th data-field="codigo produto" data-sortable="true">Codigo Produto</th>
+                      <th data-field="consultora" data-sortable="true">Consultora</th>
+                      <th data-field="observacao" data-sortable="true">Observação</th>
+                      <th data-field="Nota" data-sortable="true">Nota</th>
+                      <th data-field="Cirada em" data-sortable="true">Cirada em</th>
+                      <th data-field="Opções" data-sortable="true">Opções</th>
+                      <th data-field="Status" data-sortable="true">Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -35,12 +42,12 @@
                     <tr>
                       <td>{{ocorrencia.id}}</td>
                       <td>{{ocorrencia.codigo_produto}}</td>
-                      <td>{{ocorrencia.consultora.nome}}</td>
-                      <td>{{ocorrencia.ocorrencia}}</td>
-                      <td><a href=" {% get_media_prefix %}{{ocorrencia.nota}}"><i class="fas fa-file-invoice"></i></a></td>
+                      <td>{{ocorrencia.consultora}}</td>
+                      <td>{{ocorrencia.observacao}}</td>
+                      <td>{{ocorrencia.numero_nota}}   <a href=" {% get_media_prefix %}{{ocorrencia.nota}}"><i class="fas fa-file-invoice"></i></a></td>
                       <td>{{ocorrencia.date_created}}</td>
                       <td><a href="{% url 'ocorrencias_edit' ocorrencia.id %}" class="fas fa-edit"></a> <a class="fas fa-trash-alt" href="#" data-toggle="modal" data-target="#deleteModal"></a></td>
-                      <td class="bg-warning">{{ocorrencia.status}} </td>
+                      <td class="bg-status-{{ocorrencia.status.codigo}}">{{ocorrencia.status}} </td>
                     </tr>    
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -116,7 +123,10 @@
 
     <!-- Page level custom scripts -->
     <script src=" {% static 'js/demo/datatables-demo.js' %} "></script>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
 </body>
 {% endblock scripts %}
    

@@ -13,15 +13,24 @@ def ocorrencias_show(request):
 
 @login_required
 def ocorrencias_new(request):
-    form = OccurrenceForm(request.POST, request.FILES,None)
-    context = {
-        'form' : form,
-        'titulo': 'Nova Ocorrencia',
-    }
-    if form.is_valid():
-        form.save()
-        return redirect('ocorrencias_show')
+    if request.method == "POST":
+        form = OccurrenceForm(request.POST, request.FILES,None)
+        files = request.FILES.getlist('nota')
+        if form.is_valid():
+            for f in files:
+                print(f)
+            form.save()
+            return redirect("ocorrencias_show")
+    else:
+        form = OccurrenceForm()
+        context = {
+            'form' : form,
+            'titulo': 'Nova Ocorrencia',
+        }
+        return render(request, "form_occurrence.html",context)
     return render(request, "form_occurrence.html",context)
+
+
 
 @login_required
 def ocorrencias_edit(request, id):
@@ -34,6 +43,7 @@ def ocorrencias_edit(request, id):
     if form.is_valid():
         form.save()
         return redirect('ocorrencias_show')
+    print(type(form))
     return render(request, 'form_occurrence.html',context)
 
 @login_required

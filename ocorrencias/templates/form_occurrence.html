@@ -17,13 +17,13 @@
             <div class="form-group row">
                <label  class="col-sm-2 col-form-label">Consultora</label>
                <div class="col-sm-8">
-               {% render_field form.consultora type="text" class+="form-control form-control-user" placeholder="Consultora"%}
+               {% render_field form.consultora type="text" class+="selectpicker form-control form-control-user" data-live-search="true" placeholder="Consultora"%}
                </div>
             </div>
             <div class="form-group row">
                <label  class="col-sm-2 col-form-label">Codigo Produto</label>
                <div class="col-sm-8">
-                {% render_field form.codigo_produto type="text" class+="form-control form-control-user" placeholder="Codigo Produto"%}
+                {% render_field form.codigo_produto type="number" class+="form-control form-control-user" placeholder="Codigo Produto"%}
                </div>
             </div>
             <div class="form-group row">
@@ -33,9 +33,9 @@
                </div>
             </div>
             <div class="form-group row">
-               <label  class="col-sm-2 col-form-label" >Codigo Produto</label>
+               <label  class="col-sm-2 col-form-label" >Ocorrencia</label>
                <div class="col-sm-8">
-                {% render_field form.ocorrencia type="text" class+="form-control form-control-user" placeholder="Codigo Produto"%}
+                {% render_field form.ocorrencia type="text" class+="form-control form-control-user" placeholder="Ocorrencia"%}
                </div>
             </div>         
             <div class="form-group row">
@@ -53,9 +53,10 @@
             <div class="form-group row">
                <label  class="col-sm-2 col-form-label" >Nota</label>
                <div class="col-sm-8">
-                {% render_field form.nota type="file" multiple=""  class+="" id="customFile" %}
+                {% render_field form.nota type="file" multiple="True"  class+="" id="customFile" %}
                </div>
-            </div>     
+            </div>
+     
             <button type="submit" class="btn btn-primary">Submit</button>
          </form>
       </div>
@@ -74,10 +75,20 @@
 
   <!-- Custom scripts for all pages-->
   <script src=" {% static 'js/sb-admin-2.min.js' %} "></script>
-
-
-  
-
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <!-- Latest compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+ 
+        <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-*.min.js"></script>
+ 
 </body>
 
 {% endblock scripts %}

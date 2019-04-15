@@ -8,6 +8,7 @@ import home.methods as methods
 import datetime
 from django.db import connection
 from threading import Thread
+from django.contrib.auth.decorators import login_required
 import os, csv
 
 
@@ -17,7 +18,7 @@ def start_new_thread(function):
         t.daemon = True
         t.start()
     return decorator
-
+@login_required
 def form_liberadas(request):
     context = {
         'semana_liberada' : int(datetime.datetime.now().strftime("%Y%V"))-1,
@@ -121,7 +122,7 @@ def salvarLiberada(file,semanaliberada):
         else:
             print("nao é numero")
     print("nao foi encontradas",count,"caixas")
-
+@login_required
 def show_liberadas(request):
     liberadas = Liberada.objects.all()
     context = {
