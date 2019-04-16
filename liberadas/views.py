@@ -113,7 +113,7 @@ def salvarLiberada(file,semanaliberada):
                         lista.idsemana = r[0]
                         lista.ano = int(str(r[0])[0:4])
                         lista.semana = int(str(r[0])[4:6])
-                        lista.link = "http://tupper-tools.herokuapp.com/api/liberadas/"+str(r[0])
+                        lista.link = "http://ec2-35-171-20-57.compute-1.amazonaws.com:8000/api/liberadas/"+str(r[0])
                         try:
                             lista.save()
                         except expression as identifier:

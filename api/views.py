@@ -20,19 +20,19 @@ class api_listLiberada(APIView):
     permission_classes = (IsAuthenticated,)             # <-- And here
 
     def get(self, request):
-        # with connection.cursor() as cursor:
-        #     cursor.execute("SELECT semana_liberada FROM public.liberadas_liberada GROUP BY semana_liberada")
-        #     row = cursor.fetchall()
-        #     for r in row:
-        #         lista = listSemana()
-        #         lista.idsemana = r[0]
-        #         lista.ano = int(str(r[0])[0:4])
-        #         lista.semana = int(str(r[0])[4:6])
-        #         lista.link = "http://tupper-tools.herokuapp.com/api/liberadas/"+str(r[0])
-        #         try:
-        #             lista.save()
-        #         except Exception as e:
-        #             pass
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT semana_liberada FROM public.liberadas_liberada GROUP BY semana_liberada")
+            row = cursor.fetchall()
+            for r in row:
+                lista = listSemana()
+                lista.idsemana = r[0]
+                lista.ano = int(str(r[0])[0:4])
+                lista.semana = int(str(r[0])[4:6])
+                lista.link = "http://ec2-35-171-20-57.compute-1.amazonaws.com:8000/api/liberadas/"+str(r[0])
+                try:
+                    lista.save()
+                except Exception as e:
+                    pass
                         
             
             
