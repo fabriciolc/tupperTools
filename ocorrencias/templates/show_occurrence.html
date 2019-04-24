@@ -34,7 +34,7 @@
                       <th data-field="Nota" data-sortable="true">Nota</th>
                       <th data-field="Cirada em" data-sortable="true">Cirada em</th>
                       <th data-field="Opções" data-sortable="true">Opções</th>
-                      <th data-field="Garantia" data-sortable="true">Garantia</th>
+                      <th data-field="Garantia" data-sortable="true">Tipo</th>
                       <th data-field="Status" data-sortable="true">Status</th>
                     </tr>
                   </thead>
@@ -48,7 +48,7 @@
                       <td>{{ocorrencia.numero_nota}}   <a href=" {% get_media_prefix %}{{ocorrencia.nota}}"><i class="fas fa-file-invoice"></i></a></td>
                       <td>{{ocorrencia.date_created}}</td>
                       <td><a href="{% url 'ocorrencias_edit' ocorrencia.id %}" class="fas fa-edit"></a> <a class="fas fa-trash-alt" href="#" data-toggle="modal" data-target="#deleteModal"></a></td>
-                      <td>{% if ocorrencia.garantia %}<i class="fas fa-check icon-color-green"></i> {% else %}<i class="fas fa-times  icon-color-red"></i>{% endif %}</td>
+                      <td>{% if ocorrencia.garantia %}Garantia</i> {% else %}Ocorrencia{% endif %}</td>
                       <td class="bg-status-{{ocorrencia.status.codigo}}">{{ocorrencia.status}} </td>
                     </tr>    
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

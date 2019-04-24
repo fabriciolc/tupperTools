@@ -15,12 +15,6 @@
          <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group row">
-               <label  class="col-sm-2 col-form-label">Garantia</label>
-               <div class="col-sm-8 ml-4">
-               {% render_field form.garantia type="checkbox" class+="form-check-input"  placeholder="Consultora"%}
-               </div>
-            </div>
-            <div class="form-group row">
                <label  class="col-sm-2 col-form-label">Consultora</label>
                <div class="col-sm-8">
                {% render_field form.consultora type="text" class+="selectpicker form-control form-control-user" data-live-search="true" placeholder="Consultora"%}
@@ -55,7 +49,13 @@
                <div class="col-sm-8">
                 {% render_field form.status type="text" class+="form-control " placeholder=""%}
                </div>
-            </div>    
+            </div>   
+            <div class="form-group row">
+               <label  class="col-sm-2 col-form-label">Garantia</label>
+               <div class="col-sm-8 ml-4">
+               {% render_field form.garantia type="checkbox" class+="form-check-input"  placeholder="Consultora"%}
+               </div>
+            </div> 
             <div class="form-group row">
                <label  class="col-sm-2 col-form-label" >Nota</label>
                <div class="col-sm-8">
@@ -63,7 +63,8 @@
                </div>
             </div>
      
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="cancel" class="btn btn-danger">Cancelar</button>
          </form>
       </div>
    </div>
