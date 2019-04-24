@@ -14,6 +14,7 @@ class Ocorrencia(models.Model):
     status = models.ForeignKey(Status_type, on_delete=models.CASCADE)
     date_created = models.DateField(default=date.today)
     last_updated = models.DateField(auto_now=True)
+    garantia = models.BooleanField(default=False)
     def __str__(self):
         return (str(self.consultora)+" | "+ str(self.codigo_produto)+" | "+str(self.status))
 

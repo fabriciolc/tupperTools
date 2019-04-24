@@ -1,7 +1,7 @@
 *.idea
 *.sqlite3
 *.pyc
-files/ocorrencias/*
+files/*
 .DS_Store
 media
 .env
