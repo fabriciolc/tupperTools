@@ -2,7 +2,7 @@ from django import forms
 from .models import Ocorrencia
 from home.models import Consultora
 class OccurrenceForm(forms.ModelForm):
-    garantia = forms.BooleanField()
+    garantia = forms.BooleanField(required=False)
 
     class Meta:
         model = Ocorrencia
