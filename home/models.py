@@ -52,10 +52,4 @@ class Consultora(models.Model):
     bloqueadosn = models.CharField(max_length=2, null=True)
     def __str__(self):
         return str(self.codigo)+" "+self.nome
-class Status_type(models.Model):
-    codigo = models.IntegerField(primary_key=True)
-    status  = models.CharField(max_length=100)
-    def __str__(self):
-        return self.status
-
 

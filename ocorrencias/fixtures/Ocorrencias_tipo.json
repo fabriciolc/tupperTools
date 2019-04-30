@@ -1,0 +1,23 @@
+[
+{
+    "model": "ocorrencias.ocorrencia_tipo",
+    "pk": 1,
+    "fields": {
+        "tipo": "Produto Danificado no Transporte"
+    }
+},
+{
+    "model": "ocorrencias.ocorrencia_tipo",
+    "pk": 2,
+    "fields": {
+        "tipo": "Produto faltando"
+    }
+},
+{
+    "model": "ocorrencias.ocorrencia_tipo",
+    "pk": 3,
+    "fields": {
+        "tipo": "Defeito de Fabricação"
+    }
+}
+]

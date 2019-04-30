@@ -1,0 +1,51 @@
+[
+{
+    "model": "ocorrencias.status_type",
+    "pk": 1,
+    "fields": {
+        "status": "Em atendimento"
+    }
+},
+{
+    "model": "ocorrencias.status_type",
+    "pk": 2,
+    "fields": {
+        "status": "Aguardando peça para Analise"
+    }
+},
+{
+    "model": "ocorrencias.status_type",
+    "pk": 3,
+    "fields": {
+        "status": "Aguardando Nota Fiscal"
+    }
+},
+{
+    "model": "ocorrencias.status_type",
+    "pk": 4,
+    "fields": {
+        "status": "Ocorrencia reprovada"
+    }
+},
+{
+    "model": "ocorrencias.status_type",
+    "pk": 5,
+    "fields": {
+        "status": "Ocorrencia enviada"
+    }
+},
+{
+    "model": "ocorrencias.status_type",
+    "pk": 6,
+    "fields": {
+        "status": "Fora de prazo de envio"
+    }
+},
+{
+    "model": "ocorrencias.status_type",
+    "pk": 7,
+    "fields": {
+        "status": "Finalizado"
+    }
+}
+]
