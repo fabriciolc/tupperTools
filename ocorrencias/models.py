@@ -27,7 +27,7 @@ class Ocorrencia(models.Model):
     ocorrencia = models.ForeignKey(Ocorrencia_tipo, on_delete=models.CASCADE, null=True, blank=True)
     garantia = models.BooleanField(default=False)
     nomeProduto = models.CharField(max_length=100,null=True)
-    semanaNota = models.IntegerField(default=0)
+    semanaNota = models.IntegerField(default=0,null=True)
     def __str__(self):
         return (str(self.consultora)+" | "+ str(self.codigo_produto)+" | "+str(self.status))
 
