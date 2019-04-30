@@ -6,3 +6,4 @@ files/*
 media
 .env
 *env
+home/fixtures/home.json
